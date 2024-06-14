@@ -9,20 +9,20 @@ type Item = {
   text: string
 }
 
-const INITIAL_ITEMS: Item[] = [
-  {
-    id: crypto.randomUUID(),
-    timestamp: Date.now(),
-    text: 'Chimera'
-  }, {
-    id: crypto.randomUUID(),
-    timestamp: Date.now(),
-    text: 'Tenpai'
-  }
-]
+//const INITIAL_ITEMS: Item[] = [
+//  {
+//    id: crypto.randomUUID(),
+//    timestamp: Date.now(),
+//    text: 'Chimera'
+//  }, {
+//    id: crypto.randomUUID(),
+//    timestamp: Date.now(),
+//    text: 'Tenpai'
+//  }
+//]
 
 function App() {
-  const [items, setItems] = useState(INITIAL_ITEMS)
+  const [items, setItems] = useState<Item[]>([])
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
@@ -55,7 +55,9 @@ function App() {
           <h1>Prueba tecnosa</h1>
           <h2> Anadir y eliminar elementos a una lista</h2>
 
-          <form onSubmit={handleSubmit}>
+          <form
+            onSubmit={handleSubmit}
+            aria-label='add element to list'>
             <label>
               Elemento a introducir:
               <input
