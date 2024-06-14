@@ -1,13 +1,17 @@
 
 
 import { useState, useMemo } from 'react'
+import { ItemComponent } from './components/item'
 import './App.css'
 
-type Item = {
+
+export type Item = {
   id: `${string}-${string}-${string}-${string}-${string}`
   timestamp: number
   text: string
 }
+
+export type ItemID = `${string}-${string}-${string}-${string}-${string}`
 
 //const INITIAL_ITEMS: Item[] = [
 //  {
@@ -82,13 +86,13 @@ function App() {
                   {
                     items.map(item => {
                       return (
-                        <li key={item.id}>
-                          {item.text}
-                          <button onClick={() => handleRemoveItem(item.id)}>
-                            Eliminar
-                          </button>
-                        </li>
+                        <ItemComponent
+                          key={item.id}
+                          item={item}
+                          handleRemoveItem={handleRemoveItem}
+                        />
                       )
+
                     })
                   }
                 </ul>
