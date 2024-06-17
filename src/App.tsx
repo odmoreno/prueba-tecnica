@@ -1,6 +1,7 @@
 import { ItemComponent } from './components/item'
 import { useItems } from './hooks/useItems'
 import './App.css'
+import { useSeo } from './hooks/useSeo'
 
 
 export type Item = {
@@ -26,6 +27,11 @@ export type ItemID = `${string}-${string}-${string}-${string}-${string}`
 function App() {
 
   const { items, addItem, removeItem, isEmpty } = useItems()
+
+  useSeo({
+    title: `[${items.length}] Prueba tecnica de react`,
+    description: 'Add and remove elements from list'
+  })
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
