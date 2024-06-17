@@ -1,7 +1,5 @@
-
-
-import { useState, useMemo } from 'react'
 import { ItemComponent } from './components/item'
+import { useItems } from './hooks/useItems'
 import './App.css'
 
 
@@ -26,7 +24,8 @@ export type ItemID = `${string}-${string}-${string}-${string}-${string}`
 //]
 
 function App() {
-  const [items, setItems] = useState<Item[]>([])
+
+  const { items, addItem, removeItem, isEmpty } = useItems()
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
@@ -36,21 +35,16 @@ function App() {
     const isInput = input instanceof HTMLInputElement
     if (!isInput || input == null) return
 
-    const newItem: Item = {
-      id: crypto.randomUUID(),
-      text: input.value,
-      timestamp: Date.now()
-    }
+    addItem(input.value)
 
-    setItems([...items, newItem])
     input.value = ''
   }
 
   function handleRemoveItem(id: Item['id']) {
-    setItems(prevItems => prevItems.filter((item) => item.id !== id))
+    removeItem(id)
   }
 
-  const isEmpty = useMemo(() => items.length === 0, [items])
+
 
   return (
     <>
